@@ -1,0 +1,6 @@
+# Python compiled code
+*.pyc
+/*.egg-info/
+/build/
+/dist/
+
