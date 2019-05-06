@@ -1,0 +1,12 @@
+ARG PY_VER=3.7
+FROM python:${PY_VER}
+
+RUN pip install pytest pytest-coverage
+
+COPY . /src/
+
+WORKDIR /src/
+
+RUN pip install -e .
+
+CMD py.test --cov=kismet_rest --cov-report=term-missing

@@ -1,0 +1,26 @@
+FROM ubuntu:18.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y \
+        apt-transport-https \
+        gnupg \wget && \
+    wget -O - https://www.kismetwireless.net/repos/kismet-release.gpg.key | apt-key add - && \
+    echo 'deb https://www.kismetwireless.net/repos/apt/release/bionic bionic main' | tee /etc/apt/sources.list.d/kismet.list && \
+    apt-get update && \
+    apt-get install -y \
+        kismet-core-debug 
+        # kismet-capture-linux-bluetooth \
+        # kismet-capture-linux-wifi \
+        # kismet-capture-nrf-mousejack \
+        # python-kismetcapturertl433 \
+        # python-kismetexternal \
+        # strace
+
+EXPOSE 2501
+
+RUN echo "httpd_username=admin" >> /etc/kismet/kismet.conf
+RUN echo "httpd_password=passwordy" >> /etc/kismet/kismet.conf
+
+CMD kismet -c /export/kismet.pcap:

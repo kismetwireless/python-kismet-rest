@@ -1,0 +1,53 @@
+FROM ubuntu:18.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /source
+
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential \
+        git \
+        libmicrohttpd-dev \
+        pkg-config \
+        zlib1g-dev \
+        libnl-3-dev \
+        libnl-genl-3-dev \
+        libcap-dev \
+        libpcap-dev \
+        libnm-dev \
+        libdw-dev \
+        libsqlite3-dev \
+        libprotobuf-dev \
+        libprotobuf-c-dev \
+        protobuf-compiler \
+        protobuf-c-compiler \
+        libsensors4-dev \
+        python \
+        python-setuptools \
+        python-protobuf \
+        python-requests \
+        librtlsdr0 \
+        python-usb \
+        python-paho-mqtt \
+        libusb-1.0-0-dev
+
+RUN git clone https://www.kismetwireless.net/git/kismet.git
+
+WORKDIR /source/kismet
+
+RUN ./configure
+
+# RUN make suidinstall
+RUN  make && make install
+
+# RUN usermod -aG kismet $USER
+
+EXPOSE 2501
+
+RUN find / -name kismet.conf
+
+RUN echo "httpd_username=admin" >> /usr/local/etc/kismet.conf
+RUN echo "httpd_password=passwordy" >> /usr/local/etc/kismet.conf
+
+CMD kismet -c /export/kismet.pcap:
