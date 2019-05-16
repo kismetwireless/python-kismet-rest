@@ -16,7 +16,7 @@ docker run \
     -v ${PWD}/kismet.pcap:/export/kismet.pcap \
     kismet
 
-sleep 10
+sleep 15
 
 # Build testing image for Python 2.7
 docker build -t testme:2.7 -f ./dockerfiles/Dockerfile.kismet-rest_2.7 .
@@ -46,7 +46,7 @@ docker run \
     -v ${PWD}/kismet.pcap:/export/kismet.pcap \
     kismet
 
-sleep 10
+sleep 15
 
 # Build testing image for Python 3.7
 docker build -t testme:3.7 -f ./dockerfiles/Dockerfile.kismet-rest_3.7 .
@@ -79,7 +79,7 @@ docker run \
     -v ${PWD}/kismet.pcap:/export/kismet.pcap \
     kismet
 
-sleep 10
+sleep 15
 
 # Build testing image for Python 2.7
 docker build -t testme:2.7 -f ./dockerfiles/Dockerfile.kismet-rest_2.7 .
@@ -109,7 +109,7 @@ docker run \
     -v ${PWD}/kismet.pcap:/export/kismet.pcap \
     kismet
 
-sleep 10
+sleep 15
 
 # Build testing image for Python 3.7
 docker build -t testme:3.7 -f ./dockerfiles/Dockerfile.kismet-rest_3.7 .

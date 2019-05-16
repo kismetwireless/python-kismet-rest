@@ -13,5 +13,8 @@ This library presents endpoints as Python objects.
    :caption: Tables:
 
    alerts
+   datasources
    devices
+   gps
+   messages
    system

@@ -438,6 +438,9 @@ class KismetConnector(BaseInterface):
     def device_by_mac(self, mac, fields=None):
         """Return a list of all devices matching ``mac``.
 
+        Deprecated.
+        Use :py:meth:`kismet_rest.Devices.yield_by_mac` instead.
+
         Return a vector of all devices in all phy types matching the supplied
         MAC address; typically this will return a vector of a single device,
         but MAC addresses could overlap between phy types.
@@ -454,6 +457,9 @@ class KismetConnector(BaseInterface):
 
     def datasources(self):
         """Return a list of data sources.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.yield_all` instead.
 
         Return:
             list: List of dictionary-type objects, which describe data sources.
@@ -504,11 +510,18 @@ class KismetConnector(BaseInterface):
         return self.interact("GET", "datasource/all_sources.json")
 
     def datasource_list_interfaces(self):
-        """Return a list of all available interfaces."""
+        """Return a list of all available interfaces.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.yield_interfaces` instead.
+        """
         return self.interact("GET", "datasource/list_interfaces.json")
 
     def config_datasource_set_channel(self, uuid, channel):
         """Return ``True`` if operation was successful, ``False`` otherwise.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.set_channel` instead.
 
         Locks an data source to an 802.11 channel or frequency.  Channel
         may be complex channel such as "6HT40+".
@@ -523,6 +536,9 @@ class KismetConnector(BaseInterface):
     def config_datasource_set_hop_rate(self, uuid, rate):
         """Set the hop rate of a specific data source by UUID.
 
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.set_hop_rate` instead.
+
         Configures the hopping rate of a data source, while not changing the
         channels used for hopping.
 
@@ -534,6 +550,9 @@ class KismetConnector(BaseInterface):
 
     def config_datasource_set_hop_channels(self, uuid, rate, channels):
         """Set datasource hopping rate by UUID.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.set_hop_channels` instead.
 
         Configures a data source for hopping at 'rate' over a vector of
         channels.
@@ -548,6 +567,9 @@ class KismetConnector(BaseInterface):
     def config_datasource_set_hop(self, uuid):
         """Configure a source for hopping.
 
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.set_hop` instead.
+
         Uses existing source hop / channel list / etc attributes.
 
         Requires valid login
@@ -558,6 +580,9 @@ class KismetConnector(BaseInterface):
 
     def add_datasource(self, source):
         """Add a new source to Kismet.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Datasources.add` instead.
 
         source is a standard source definition.
 
@@ -575,6 +600,9 @@ class KismetConnector(BaseInterface):
                      phyname=None):
         """
         define_alert(name, description, rate, burst) -> Boolean
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Alerts.define` instead.
 
         LOGIN REQUIRED
 
@@ -597,6 +625,9 @@ class KismetConnector(BaseInterface):
     def raise_alert(self, name, text, bssid=None, source=None, dest=None,
                     other=None, channel=None):
         """Raise an alert in Kismet.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Alerts.raise` instead.
 
         LOGIN REQUIRED
 
@@ -634,6 +665,9 @@ class KismetConnector(BaseInterface):
     def alerts(self, ts_sec=0, ts_usec=0):
         """Return alert object.
 
+        Deprecated.
+        Use :py:meth:`kismet_rest.Alerts.yield_all` instead.
+
         Fetch alert object, containing metadata and list of alerts, optionally
         filtered to alerts since a given timestamp
 
@@ -651,6 +685,9 @@ class KismetConnector(BaseInterface):
 
     def messages(self, ts_sec=0, ts_usec=0):
         """Return message object.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.Messages.yield_all` instead.
 
         Fetch message object, containing metadata and list of messages,
         optionally filtered to messages since a given timestamp
@@ -670,6 +707,9 @@ class KismetConnector(BaseInterface):
 
     def location(self):
         """Return the gps location.
+
+        Deprecated.
+        Use :py:meth:`kismet_rest.GPS.current_location` instead.
 
         Return:
             dict: Dictionary object describing current location of Kismet

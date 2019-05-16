@@ -9,7 +9,7 @@ class Devices(BaseInterface):
     kwargs_defaults = {"ts": 0}
     url_template = "devices/last-time/{ts}/devices.ekjson"
 
-    def yield_all(self, callback=None, callback_args=None, **kwargs):
+    def all(self, callback=None, callback_args=None, **kwargs):
         """Yield all devices, one at a time.
 
         If callback is set, nothing will be returned.
@@ -35,7 +35,7 @@ class Devices(BaseInterface):
         for result in self.interact_yield("POST", url, **callback_settings):
             yield result
 
-    def yield_by_mac(self, callback=None, callback_args=None, **kwargs):
+    def by_mac(self, callback=None, callback_args=None, **kwargs):
         """Yield devices matching provided MAC addresses or masked MAC groups.
 
         Args:
@@ -62,11 +62,14 @@ class Devices(BaseInterface):
         for result in self.interact_yield("POST", url, **call_settings):
             yield result
 
-    def get_by_key(self, device_key, field=None, fields=None):
+    def by_key(self, device_key, field=None, fields=None):
         """Return a dictionary representing one device, identified by ``key``.
 
         Fetch a complete device record by the Kismet key (unique key per Kismet
         session) or fetch a specific sub-field by path.
+
+        Return:
+            dict: Dictionary object describing one device.
         """
         url = "devices/by-key/{}/device.json".format(device_key)
         if not fields and field:

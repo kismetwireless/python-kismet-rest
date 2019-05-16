@@ -15,7 +15,7 @@ class TestIntegrationDevices(object):
     def test_devices_yield_all(self):
         """Test getting devices."""
         devices = self.create_authenticated_session()
-        all_devices = devices.yield_all()
+        all_devices = devices.all()
         for device in all_devices:
             assert isinstance(device, dict)
 
@@ -23,7 +23,7 @@ class TestIntegrationDevices(object):
         """Test devices with callback."""
         devices = self.create_authenticated_session()
         callback = pprint.pprint
-        all_devices = devices.yield_all(callback)
+        all_devices = devices.all(callback)
         assert all_devices
         for device in all_devices:
             assert isinstance(device, None)
@@ -32,7 +32,7 @@ class TestIntegrationDevices(object):
         """Test getting devices."""
         devices = self.create_authenticated_session()
         device_list = ["00:00:00:00:00:00/00:00:00:00:00:00"]
-        all_devices = devices.yield_by_mac(devices=device_list)
+        all_devices = devices.by_mac(devices=device_list)
         for device in all_devices:
             assert isinstance(device, dict)
 
@@ -41,7 +41,7 @@ class TestIntegrationDevices(object):
         devices = self.create_authenticated_session()
         callback = pprint.pprint
         device_list = ["00:00:00:00:00:00/00:00:00:00:00:00"]
-        all_devices = devices.yield_by_mac(callback, devices=device_list)
+        all_devices = devices.by_mac(callback, devices=device_list)
         assert all_devices
         for device in all_devices:
             assert isinstance(device, None)
@@ -49,7 +49,7 @@ class TestIntegrationDevices(object):
     def test_devices_dot11_clients_of(self):
         """Test getting clients of device."""
         devices = self.create_authenticated_session()
-        target_devices = [x for x in devices.yield_all()]
+        target_devices = [x for x in devices.all()]
         target = target_devices[0]["kismet.device.base.key"]
         for client in devices.dot11_clients_of(target):
             assert isinstance(client, dict)
@@ -63,7 +63,7 @@ class TestIntegrationDevices(object):
     def test_get_device_by_key(self):
         """Test getting clients of device."""
         devices = self.create_authenticated_session()
-        target_devices = [x for x in devices.yield_all()]
+        target_devices = [x for x in devices.all()]
         target = target_devices[0]["kismet.device.base.key"]
-        result = devices.get_by_key(target)
+        result = devices.by_key(target)
         assert isinstance(result, dict)

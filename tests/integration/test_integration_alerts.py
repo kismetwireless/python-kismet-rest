@@ -10,7 +10,7 @@ class TestIntegrationAlerts(object):
     def test_alerts_yield_all(self):
         """Test getting alerts."""
         alerts = kismet_rest.Alerts(username="admin", password="passwordy")
-        all_alerts = alerts.yield_all()
+        all_alerts = alerts.all()
         for alert in all_alerts:
             assert isinstance(alert, dict)
 
@@ -18,7 +18,7 @@ class TestIntegrationAlerts(object):
         """Test alerts with callback."""
         alerts = kismet_rest.Alerts(username="admin", password="passwordy")
         callback = pprint.pprint
-        all_alerts = alerts.yield_all(callback)
+        all_alerts = alerts.all(callback)
         assert all_alerts
         for alert in all_alerts:
             assert isinstance(alert, None)

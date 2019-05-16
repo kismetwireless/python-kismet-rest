@@ -4,4 +4,4 @@ Devices
 .. toctree::
 
 .. autoclass:: kismet_rest.Devices
-   :members: yield_all
+   :members: all, by_mac, by_key, dot11_clients_of, dot11_access_points

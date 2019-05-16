@@ -4,4 +4,4 @@ Alerts
 .. toctree::
 
 .. autoclass:: kismet_rest.Alerts
-   :members: yield_all
+   :members: all, define, raise_alert
