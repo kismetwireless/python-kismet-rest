@@ -3,6 +3,10 @@ kismet_rest
 
 Python wrapper for Kismet REST interface.
 
+.. image:: https://readthedocs.org/projects/kismet-rest/badge/?version=latest
+  :target: https://kismet-rest.readthedocs.io/en/latest/?badge=latest
+  :alt: Documentation Status
+
 
 Installing from PyPI
 ----------------------
