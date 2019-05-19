@@ -1,7 +1,4 @@
 """Test kismet_rest.Datasources abstraction."""
-
-import pytest
-
 import kismet_rest
 
 
@@ -14,14 +11,14 @@ class TestIntegrationDatasources(object):
                                        password="passwordy",
                                        debug=True)
 
-    def test_datasources_yield_all(self):
+    def test_datasources_all(self):
         """Test getting datasources."""
         datasources = self.create_authenticated_session()
         all_sources = datasources.all()
         for source in all_sources:
             assert isinstance(source, dict)
 
-    def test_datasources_yield_all_interfaces(self):
+    def test_datasources_interfaces(self):
         """Test getting datasources."""
         datasources = self.create_authenticated_session()
         all_sources = datasources.interfaces()

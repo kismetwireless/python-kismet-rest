@@ -1,8 +1,6 @@
 """Integration tests for kismet_rest.BaseInterface."""
 import json
 
-import pytest
-
 import kismet_rest
 
 

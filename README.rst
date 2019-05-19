@@ -44,7 +44,7 @@ ________________________
 
     import kismet_rest
     alerts = kismet_rest.Alerts()
-    for alert in alerts.yield_all(ts_sec=1546300800):
+    for alert in alerts.all(ts_sec=1546300800):
         print(alert)
 
 
@@ -55,5 +55,5 @@ _______________________________________
 
     import kismet_rest
     devices = kismet_rest.Devices()
-    for device in devices.yield_all(ts=1546300800):
+    for device in devices.all(ts=1546300800):
         print(device)

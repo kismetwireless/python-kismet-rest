@@ -7,7 +7,7 @@ import kismet_rest
 class TestIntegrationAlerts(object):
     """Test Alerts()."""
 
-    def test_alerts_yield_all(self):
+    def test_alerts_all(self):
         """Test getting alerts."""
         alerts = kismet_rest.Alerts(username="admin", password="passwordy")
         all_alerts = alerts.all()

@@ -12,7 +12,7 @@ class TestIntegrationDevices(object):
                                    password="passwordy",
                                    debug=True)
 
-    def test_devices_yield_all(self):
+    def test_devices_all(self):
         """Test getting devices."""
         devices = self.create_authenticated_session()
         all_devices = devices.all()
@@ -28,7 +28,7 @@ class TestIntegrationDevices(object):
         for device in all_devices:
             assert isinstance(device, None)
 
-    def test_devices_yield_by_mac(self):
+    def test_devices_by_mac(self):
         """Test getting devices."""
         devices = self.create_authenticated_session()
         device_list = ["00:00:00:00:00:00/00:00:00:00:00:00"]
@@ -36,7 +36,7 @@ class TestIntegrationDevices(object):
         for device in all_devices:
             assert isinstance(device, dict)
 
-    def test_devices_yield_by_mac_callback(self):
+    def test_devices_by_mac_callback(self):
         """Test devices with callback."""
         devices = self.create_authenticated_session()
         callback = pprint.pprint

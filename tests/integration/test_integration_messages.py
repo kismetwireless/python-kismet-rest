@@ -12,7 +12,7 @@ class TestIntegrationMessages(object):
                                     password="passwordy",
                                     debug=True)
 
-    def test_messages_yield_all(self):
+    def test_messages_all(self):
         """Test getting messages."""
         messages = self.create_authenticated_session()
         all_messages = messages.all()

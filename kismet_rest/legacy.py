@@ -88,14 +88,6 @@ Filter Specification:
 class KismetConnector(BaseInterface):
     """Kismet rest API."""
 
-    def get_all(self, **kwargs):
-        """Not valid here."""
-        raise NotImplementedError
-
-    def yield_all(self, **kwargs):
-        """Not valid here."""
-        raise NotImplementedError
-
     def system_status(self):
         """Return system status.
 
@@ -106,7 +98,7 @@ class KismetConnector(BaseInterface):
     def device_summary(self, callback=None, cbargs=None):
         """Return a summary of all devices.
 
-        Note: This is superseded by :py:meth:`kismet_rest.Devices.yield_all`
+        Note: This is superseded by :py:meth:`kismet_rest.Devices.all`
 
         Deprecated API - now referenced as device_list(..)
         """
@@ -115,7 +107,7 @@ class KismetConnector(BaseInterface):
     def device_list(self, callback=None, cbargs=None):
         """Return all fields of all devices.
 
-        Note: This is superseded by :py:meth:`kismet_rest.Devices.yield_all`
+        Note: This is superseded by :py:meth:`kismet_rest.Devices.all`
 
         This may be extremely memory and CPU intensive and should be avoided.
         Memory use can be reduced by providing a callback, which will be
@@ -140,7 +132,7 @@ class KismetConnector(BaseInterface):
         device_summary_since(ts, [fields, callback, cbargs]) ->
             device summary list
 
-        Note: This is superseded by :py:meth:`kismet_rest.Devices.yield_all`
+        Note: This is superseded by :py:meth:`kismet_rest.Devices.all`
 
         Deprecated API - now referenced as smart_device_list(...)
 
@@ -156,7 +148,7 @@ class KismetConnector(BaseInterface):
         smart_summary_since([ts, fields, regex, callback, cbargs]) ->
             device summary list
 
-        Note: This is superseded by :py:meth:`kismet_rest.Devices.yield_all`
+        Note: This is superseded by :py:meth:`kismet_rest.Devices.all`
 
         Deprecated API - now referenced as smart_device_list(...)
         """
@@ -167,7 +159,7 @@ class KismetConnector(BaseInterface):
                           cbargs=None):
         """Return a list of devices.
 
-        Note: This is superseded by :py:meth:`kismet_rest.Devices.yield_all`
+        Note: This is superseded by :py:meth:`kismet_rest.Devices.all`
 
         Perform a 'smart' device list.  The device list can be manipulated in
         several ways:
@@ -459,7 +451,7 @@ class KismetConnector(BaseInterface):
         """Return a list of data sources.
 
         Deprecated.
-        Use :py:meth:`kismet_rest.Datasources.yield_all` instead.
+        Use :py:meth:`kismet_rest.Datasources.all` instead.
 
         Return:
             list: List of dictionary-type objects, which describe data sources.
@@ -666,7 +658,7 @@ class KismetConnector(BaseInterface):
         """Return alert object.
 
         Deprecated.
-        Use :py:meth:`kismet_rest.Alerts.yield_all` instead.
+        Use :py:meth:`kismet_rest.Alerts.all` instead.
 
         Fetch alert object, containing metadata and list of alerts, optionally
         filtered to alerts since a given timestamp
@@ -687,7 +679,7 @@ class KismetConnector(BaseInterface):
         """Return message object.
 
         Deprecated.
-        Use :py:meth:`kismet_rest.Messages.yield_all` instead.
+        Use :py:meth:`kismet_rest.Messages.all` instead.
 
         Fetch message object, containing metadata and list of messages,
         optionally filtered to messages since a given timestamp
