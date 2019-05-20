@@ -61,3 +61,23 @@ _______________________________________
     devices = kismet_rest.Devices()
     for device in devices.all(ts=1546300800):
         print(device)
+
+
+Developer notes:
+----------------
+
+* Formatting commit messages:
+  * Correctly-formatted commit messages will be organized in ``CHANGELOG.rst``.
+    * Commit messages are formatted like this: ``type: audience: message !tag``
+    * Type is for the type of change (``new``, ``chg``)
+    * Audience is for the audience of the commit note(``usr``,``test``,``doc``)
+    * The message part is pretty self-explanatory.
+    * The optional tag allows you to flag a commit for exclusion from
+      CHANGELOG.rst.(``minor`` or ``wip``)
+  * A commit message like this: ``new: usr: Made a new widget.`` will appear in
+    CHANGELOG.rst, under the appropriate release, under the "New" section.
+  * More info on message formatting: https://github.com/vaab/gitchangelog
+* Updating CHANGELOG.rst:
+  * Install gitchangelog: ``pip3 install gitchangelog``
+  * Make sure that ``__version__`` is correct in ``kismet_rest/__init__.py``
+  * Build the new changelog: ``gitchangelog > CHANGELOG.rst``
