@@ -30,7 +30,7 @@ Usage examples
 
 
 Legacy functionality (KismetConnector):
-_______________________________________
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ::
@@ -42,7 +42,7 @@ _______________________________________
 
 
 Alerts since 2019-01-01:
-________________________
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -53,7 +53,7 @@ ________________________
 
 
 Devices last observed since 2019-01-01:
-_______________________________________
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -67,15 +67,15 @@ Developer notes:
 ----------------
 
 * Formatting commit messages:
-  * Correctly-formatted commit messages will be organized in ``CHANGELOG.rst``.
-    * Commit messages are formatted like this: ``type: audience: message !tag``
-    * Type is for the type of change (``new``, ``chg``)
-    * Audience is for the audience of the commit note(``usr``,``test``,``doc``)
-    * The message part is pretty self-explanatory.
-    * The optional tag allows you to flag a commit for exclusion from
-      CHANGELOG.rst.(``minor`` or ``wip``)
+  * Correctly-formatted commit messages will be organized in CHANGELOG.rst
+  * Commit messages are formatted like this ``type: audience: message !tag``
+  * Type is for the type of change (``new``, ``chg``)
+  * Audience is for the audience of the commit note(``usr``,``test``,``doc``)
+  * The message part is pretty self-explanatory.
+  * The optional tag allows you to flag a commit for exclusion from
+  CHANGELOG.rst.(``minor`` or ``wip``)
   * A commit message like this: ``new: usr: Made a new widget.`` will appear in
-    CHANGELOG.rst, under the appropriate release, under the "New" section.
+  CHANGELOG.rst, under the appropriate release, under the "New" section.
   * More info on message formatting: https://github.com/vaab/gitchangelog
 * Updating CHANGELOG.rst:
   * Install gitchangelog: ``pip3 install gitchangelog``
