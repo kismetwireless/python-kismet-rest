@@ -72,10 +72,8 @@ Developer notes:
   * Type is for the type of change (``new``, ``chg``)
   * Audience is for the audience of the commit note(``usr``,``test``,``doc``)
   * The message part is pretty self-explanatory.
-  * The optional tag allows you to flag a commit for exclusion from
-  CHANGELOG.rst.(``minor`` or ``wip``)
-  * A commit message like this: ``new: usr: Made a new widget.`` will appear in
-  CHANGELOG.rst, under the appropriate release, under the "New" section.
+  * The optional tag allows you to flag a commit for exclusion from CHANGELOG.rst.(``minor`` or ``wip``)
+  * A commit message like this: ``new: usr: Made a new widget.`` will appear in CHANGELOG.rst, under the appropriate release, under the "New" section.
   * More info on message formatting: https://github.com/vaab/gitchangelog
 * Updating CHANGELOG.rst:
   * Install gitchangelog: ``pip3 install gitchangelog``
