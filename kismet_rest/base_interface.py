@@ -70,6 +70,7 @@ class BaseInterface(object):
             self.logger.set_debug()
         if self.username:
             self.set_login(self.username, self.password)
+        self.is_py35 = sys.version_info[0] == 3 and sys.version_info[1] == 5
 
     def set_attributes_from_dict(self, kwa):
         """Set instance attributes from dictionary if on whitelist."""
@@ -257,21 +258,23 @@ class BaseInterface(object):
 
     def process_response_stream(self, response, **kwargs):
         """Process API response as a stream."""
+        response.encoding = 'utf-8'
         if "callback" in kwargs:
             callback_args = (kwargs["callback_args"]
                              if "callback_args" in kwargs
                              else [])
-            for item in response.iter_lines():
+            for item in response.iter_lines(decode_unicode=True):
                 if callback_args:
                     kwargs["callback"](json.loads(item), *callback_args)
                     continue
                 kwargs["callback"](json.loads(item))
             return
-        for result in response.iter_lines():
+        for result in response.iter_lines(decode_unicode=True):
             yield json.loads(result)
 
     def process_response_bulk(self, response, **kwargs):
         """Process API response as a single bulk interaction."""
+        response.encoding = 'utf-8'
         if "callback" in kwargs:
             callback_args = (kwargs["callback_args"]
                              if "callback_args" in kwargs
