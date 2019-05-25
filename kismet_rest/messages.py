@@ -9,7 +9,7 @@ class Messages(BaseInterface):
     kwargs_defaults = {"ts_sec": 0, "ts_usec": 0}
     url_template = "messagebus/last-time/{ts_sec}.{ts_usec}/messages.json"
 
-    def all(self, callback=None, callback_args=None):
+    def all(self, callback=None, callback_args=None, **kwargs):
         """Yield all messages, one at a time.
 
         If callback is set, nothing will be returned.
@@ -30,6 +30,8 @@ class Messages(BaseInterface):
             callback_settings["callback"] = callback
             if callback_args:
                 callback_settings["callback_args"] = callback_args
-        url = self.url_template
+        query_args = self.kwargs_defaults.copy()
+        query_args.update(kwargs)
+        url = self.url_template.format(**query_args)
         for result in self.interact_yield("GET", url, **callback_settings):
             yield result
