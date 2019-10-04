@@ -7,7 +7,7 @@ class Devices(BaseInterface):
     """Devices abstraction."""
 
     kwargs_defaults = {"ts": 0}
-    url_template = "devices/last-time/{ts}/devices.ekjson"
+    url_template = "devices/last-time/{ts}/devices.itjson"
 
     def all(self, callback=None, callback_args=None, **kwargs):
         """Yield all devices, one at a time.
@@ -58,7 +58,7 @@ class Devices(BaseInterface):
         call_settings["payload"] = {kword: kwargs[kword]
                                     for kword in valid_kwargs
                                     if kword in kwargs}
-        url = "devices/multimac/devices.ekjson"
+        url = "devices/multimac/devices.itjson"
         for result in self.interact_yield("POST", url, **call_settings):
             yield result
 
@@ -108,7 +108,7 @@ class Devices(BaseInterface):
         call_settings["payload"] = {kword: kwargs[kword]
                                     for kword in valid_kwargs
                                     if kword in kwargs}
-        url = "phy/phy80211/clients-of/{}/clients.ekjson".format(ap_id)
+        url = "phy/phy80211/clients-of/{}/clients.itjson".format(ap_id)
         for result in self.interact_yield("POST", url, **call_settings):
             yield result
 
@@ -179,7 +179,7 @@ class Devices(BaseInterface):
                 ``kismet.device.base.type``.
         """
         valid_kwargs = ["last_time", "regex", "fields"]
-        url = "devices/views/phydot11_accesspoints/devices.ekjson"
+        url = "devices/views/phydot11_accesspoints/devices.itjson"
         call_settings = {}
         if callback:
             call_settings["callback"] = callback

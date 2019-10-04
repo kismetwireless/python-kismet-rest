@@ -7,7 +7,7 @@ class Alerts(BaseInterface):
     """Alerts abstraction."""
 
     kwargs_defaults = {"ts_sec": 0, "ts_usec": 0}
-    url_template = "alerts/last-time/{ts_sec}.{ts_usec}/alerts.ekjson"
+    url_template = "alerts/last-time/{ts_sec}.{ts_usec}/alerts.itjson"
 
     def all(self, callback=None, callback_args=None, **kwargs):
         """Yield all alerts, one at a time.

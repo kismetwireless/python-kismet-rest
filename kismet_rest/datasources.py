@@ -7,7 +7,7 @@ class Datasources(BaseInterface):
     """Datasources abstraction."""
 
     kwargs_defaults = {}
-    url_template = "datasource/all_sources.ekjson"
+    url_template = "datasource/all_sources.itjson"
 
     def all(self, callback=None, callback_args=None):
         """Yield all datasources, one at a time.
@@ -47,7 +47,7 @@ class Datasources(BaseInterface):
             callback_settings["callback"] = callback
             if callback_args:
                 callback_settings["callback_args"] = callback_args
-        url = "datasource/list_interfaces.ekjson"
+        url = "datasource/list_interfaces.itjson"
         for result in self.interact_yield("GET", url, **callback_settings):
             yield result
 

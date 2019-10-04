@@ -15,7 +15,7 @@ fields, instead of the entire object.
 This will increase the speed of searches of large sets of data, and decrease
 the time it takes for Kismet to return them.
 
-Whenever possible this API will use the 'ekjson' format for multiple returned
+Whenever possible this API will use the 'itjson' format for multiple returned
 objects - this places a JSON object for each element in an array/vector
 response as a complete JSON record followed by a newline; this allows for
 parsing the JSON response without allocating the entire vector object in memory
@@ -120,7 +120,7 @@ class KismetConnector(BaseInterface):
         It is strongly recommended that you use smart_device_list(...)
         """
         kwargs = {}
-        url = "/devices/all_devices.ekjson"
+        url = "/devices/all_devices.itjson"
         if callback:
             kwargs = {"callback": callback,
                       "callback_args": cbargs}
@@ -231,7 +231,7 @@ class KismetConnector(BaseInterface):
         if regex:
             cmd["regex"] = regex
 
-        url = "devices/last-time/{}/devices.ekjson".format(ts)
+        url = "devices/last-time/{}/devices.itjson".format(ts)
         kwargs = {"payload": cmd}
         if callback:
             kwargs = {"callback": callback,
@@ -259,7 +259,7 @@ class KismetConnector(BaseInterface):
         vector.
         """
         cmd = {}
-        url = "devices/multimac/devices.ekjson"
+        url = "devices/multimac/devices.itjson"
         if fields is not None:
             cmd["fields"] = fields
 
@@ -292,7 +292,7 @@ class KismetConnector(BaseInterface):
 
         if fields is not None:
             cmd["fields"] = fields
-        url = "phy/phy80211/clients-of/{}/clients.ekjson".format(apkey)
+        url = "phy/phy80211/clients-of/{}/clients.itjson".format(apkey)
         if callback:
             return [result for result in
                     self.interact_yield("POST", url, payload=cmd,
@@ -379,7 +379,7 @@ class KismetConnector(BaseInterface):
 
         if fields is not None:
             cmd["fields"] = fields
-        url = "devices/views/phydot11_accesspoints/devices.ekjson"
+        url = "devices/views/phydot11_accesspoints/devices.itjson"
         if callback:
             return [result for result in
                     self.interact_yield("POST", url, payload=cmd,
