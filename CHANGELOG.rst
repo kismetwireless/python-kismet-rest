@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v2020.05.01
+-----------
+
+Changes
+~~~~~~~
+- Add support for datasource open/close [ohad83]
+- Switch to itjson endpoints [Mike Kershaw / Dragorn]
 
 v2019.05.02
 -----------

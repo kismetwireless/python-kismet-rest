@@ -21,4 +21,4 @@ from .messages import Messages  # NOQA
 from .system import System  # NOQA
 from .utility import Utility  # NOQA
 
-__version__ = "2019.05.02"
+__version__ = "2020.05.01"
