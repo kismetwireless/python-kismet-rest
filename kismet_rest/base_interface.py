@@ -72,6 +72,12 @@ class BaseInterface(object):
             self.set_login(self.username, self.password)
         self.is_py35 = sys.version_info[0] == 3 and sys.version_info[1] == 5
 
+        try:
+            self.login()
+        except (requests.exceptions.ConnectionError) as err:
+            msg = "Unable to connect to Kismet: {}".format(err)
+            raise KismetConnectionError(msg)
+
     def set_attributes_from_dict(self, kwa):
         """Set instance attributes from dictionary if on whitelist."""
         for kwarg, val in kwa.items():
