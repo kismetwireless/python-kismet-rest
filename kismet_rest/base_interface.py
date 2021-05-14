@@ -19,6 +19,7 @@ if sys.version_info[0] < 3:
 else:
     from urllib.parse import urlparse
 
+import base64
 
 class BaseInterface(object):
     """Initialize with optional keyword arguments to override default settings.
@@ -49,8 +50,7 @@ class BaseInterface(object):
     permitted_kwargs = ["host_uri", "username", "password",
                         "session_cache", "debug"]
 
-    def __init__(self, host_uri='http://127.0.0.1:2501',
-                 sessioncache_path='~/.pykismet_session', **kwargs):
+    def __init__(self, host_uri='http://127.0.0.1:2501', **kwargs):
         """Initialize using legacy args or (new style) kwargs."""
         self.logger = Logger()
         self.max_retries = 5
@@ -58,7 +58,8 @@ class BaseInterface(object):
         self.host_uri = host_uri
         self.username = None
         self.password = "nopass"
-        self.session_cache = sessioncache_path
+        self.sessioncache_path = '~/.pykismet_session_' + base64.b64encode(str.encode(host_uri)).decode("utf-8").strip("=")
+        self.session_cache = self.sessioncache_path
         self.debug = False
         # Set the default path for storing sessions
         # self.sessioncache_path = None
