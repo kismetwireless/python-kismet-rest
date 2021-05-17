@@ -8,6 +8,7 @@ class Devices(BaseInterface):
 
     kwargs_defaults = {"ts": 0}
     url_template = "devices/last-time/{ts}/devices.itjson"
+    #url_template = "devices/views/all/last-time/{ts}/devices.itjson"
 
     def all(self, callback=None, callback_args=None, **kwargs):
         """Yield all devices, one at a time.
@@ -92,7 +93,7 @@ class Devices(BaseInterface):
         result. If no callback is provided, the results will be yielded.
 
         Args:
-            ap_id (str): ID of AP to return clients for.
+            ap_id (str): ID of AP to return clients for. (kismet.device.base.key)
             callback: Callback function.
             callback_args: Arguments for callback.
 
