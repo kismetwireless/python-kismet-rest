@@ -47,7 +47,7 @@ class BaseInterface(object):
     """
 
     permitted_kwargs = ["host_uri", "username", "password",
-                        "session_cache", "debug"]
+                        "session_cache", "debug", "apikey"]
 
     def __init__(self, host_uri='http://127.0.0.1:2501',
                  sessioncache_path='~/.pykismet_session', **kwargs):
@@ -58,6 +58,7 @@ class BaseInterface(object):
         self.host_uri = host_uri
         self.username = None
         self.password = "nopass"
+        self.apikey = None
         self.session_cache = sessioncache_path
         self.debug = False
         # Set the default path for storing sessions
@@ -70,6 +71,8 @@ class BaseInterface(object):
             self.logger.set_debug()
         if self.username:
             self.set_login(self.username, self.password)
+        if self.apikey:
+            self.set_apikey(self.apikey)
         self.is_py35 = sys.version_info[0] == 3 and sys.version_info[1] == 5
 
     def set_attributes_from_dict(self, kwa):
@@ -330,6 +333,11 @@ class BaseInterface(object):
     def set_login(self, username, password):
         """Set login credentials."""
         self.session.auth = (username, password)
+    
+    def set_apikey(self, apikey):
+        """Add API key to cookies."""
+        requests.utils.add_dict_to_cookiejar(
+                self.session.cookies, {"KISMET": apikey})
 
     def set_debug(self):
         """Set debug mode for more verbose output."""
