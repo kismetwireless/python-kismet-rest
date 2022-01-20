@@ -44,10 +44,17 @@ class BaseInterface(object):
         session_cache (str): Path for storing session cache information.
             Defaults to `~/.pykismet_session`.
         debug (bool): Set to True to enble debug logging.
+        apikey (str): API token for interaction with Kismet REST interface.
+        timeout (int or tuple): Number of seconds Requests will wait for your 
+            client to establish a connection to a remote machine, or wait for 
+            the server to send a response. By default, requests do not time out 
+            unless a timeout value is set explicitly. Without a timeout, your 
+            code may hang for minutes or more. See requests documentation for 
+            more information. 
     """
 
     permitted_kwargs = ["host_uri", "username", "password",
-                        "session_cache", "debug", "apikey"]
+                        "session_cache", "debug", "apikey", "timeout"]
 
     def __init__(self, host_uri='http://127.0.0.1:2501',
                  sessioncache_path='~/.pykismet_session', **kwargs):
@@ -55,6 +62,7 @@ class BaseInterface(object):
         self.logger = Logger()
         self.max_retries = 5
         self.retry_statuses = [500]
+        self.timeout = None
         self.host_uri = host_uri
         self.username = None
         self.password = "nopass"
@@ -143,7 +151,7 @@ class BaseInterface(object):
         if verb == "GET":
             self.logger.debug("interact: GET against {} "
                               "stream={}".format(full_url, stream))
-            response = self.session.get(full_url, stream=stream)
+            response = self.session.get(full_url, stream=stream, timeout=self.timeout)
         elif verb == "POST":
             if payload:
                 postdata = json.dumps(payload)
@@ -156,7 +164,7 @@ class BaseInterface(object):
                                                          formatted_payload,
                                                          stream))
             response = self.session.post(full_url, data=formatted_payload,
-                                         stream=stream)
+                                         stream=stream, timeout=self.timeout)
 
         else:
             self.logger.error("HTTP verb {} not yet supported!".format(verb))
@@ -215,7 +223,7 @@ class BaseInterface(object):
         full_url = Utility.build_full_url(self.host_uri, url_path)
         if verb == "GET":
             self.logger.debug("interact_yield: GET {}".format(full_url))
-            response = self.session.get(full_url, stream=True)
+            response = self.session.get(full_url, stream=True, timeout=self.timeout)
         elif verb == "POST":
             if payload:
                 postdata = json.dumps(payload)
@@ -226,7 +234,7 @@ class BaseInterface(object):
             self.logger.debug("interact_yield: POST against {} "
                               "with {}".format(full_url, formatted_payload))
             response = self.session.post(full_url, data=formatted_payload,
-                                         stream=True)
+                                         stream=True, timeout=self.timeout)
 
         else:
             self.logger.error("HTTP verb {} not yet supported!".format(verb))
@@ -348,7 +356,7 @@ class BaseInterface(object):
 
         Checks if a session is valid / session is logged in
         """
-        response = self.session.get("%s/session/check_session" % self.host_uri)
+        response = self.session.get("%s/session/check_session" % self.host_uri, timeout=self.timeout)
         if not response.status_code == 200:
             return False
         self.update_session()
@@ -360,7 +368,7 @@ class BaseInterface(object):
         Logs in (and caches login credentials).  Required for administrative
         behavior.
         """
-        response = self.session.get("%s/session/check_session" % self.host_uri)
+        response = self.session.get("%s/session/check_session" % self.host_uri, timeout=self.timeout)
         if not response.status_code == 200:
             msg = "login(): Invalid session: {}".format(response.text)
             self.logger.debug(msg)
