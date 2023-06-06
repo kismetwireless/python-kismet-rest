@@ -20,6 +20,7 @@ class Devices(BaseInterface):
 
         Keyword args:
             ts (int): Starting last-seen timestamp in seconds since Epoch.
+            fields (list): List of fields to return.
 
         Yield:
             dict: Device json, or None if callback is set.
@@ -29,6 +30,10 @@ class Devices(BaseInterface):
             callback_settings["callback"] = callback
             if callback_args:
                 callback_settings["callback_args"] = callback_args
+        valid_kwargs = ["fields"]
+        callback_settings["payload"] = {kword: kwargs[kword]
+                                        for kword in valid_kwargs
+                                        if kword in kwargs}
         query_args = self.kwargs_defaults.copy()
         query_args.update(kwargs)
         url = self.url_template.format(**query_args)
