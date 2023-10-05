@@ -146,6 +146,8 @@ class BaseInterface(object):
         """
         only_status = bool("only_status" in kwargs
                            and kwargs["only_status"] is True)
+        return_bytes = bool("return_bytes" in kwargs
+                           and kwargs["return_bytes"] is True)
         payload = kwargs["payload"] if "payload" in kwargs else {}
         full_url = Utility.build_full_url(self.host_uri, url_path)
         if verb == "GET":
@@ -197,6 +199,8 @@ class BaseInterface(object):
 
         if only_status:
             return bool(response)  # We can test for good resp codes like this.
+        if return_bytes:
+            return response.content
         if not stream:
             retval = self.process_response_bulk(response, **kwargs)
             self.update_session()

@@ -26,7 +26,7 @@ class KismetDB(BaseInterface):
         query_args = self.kwargs_defaults.copy()
         query_args.update(kwargs)
         url = self.url_template.format(**query_args)
-        return self.interact("POST", url, payload=cmd)
+        return self.interact("POST", url, payload=cmd, return_bytes=True)
     
     def drop_packets(self, drop_before):
         """Dropping packets
