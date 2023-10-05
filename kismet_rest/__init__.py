@@ -14,6 +14,7 @@ from .base_interface import BaseInterface  # NOQA
 from .datasources import Datasources  # NOQA
 from .devices import Devices  # NOQA
 from .gps import GPS  # NOQA
+from .kismetdb import Logger  # NOQA
 from .logger import Logger  # NOQA
 from .legacy import KismetConnector  # NOQA
 from .messages import Messages  # NOQA
