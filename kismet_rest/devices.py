@@ -20,6 +20,8 @@ class Devices(BaseInterface):
 
         Keyword args:
             ts (int): Starting last-seen timestamp in seconds since Epoch.
+            fields (list): List of fields to return.
+            regex (list): Regex filters per Kismet command_param spec.
 
         Yield:
             dict: Device json, or None if callback is set.
@@ -29,10 +31,17 @@ class Devices(BaseInterface):
             callback_settings["callback"] = callback
             if callback_args:
                 callback_settings["callback_args"] = callback_args
+        valid_payload = ["fields", "regex"]
+        payload = {kword: kwargs[kword] for kword in valid_payload
+                   if kword in kwargs}
+        # Remove payload-only keys so they don't get formatted into the URL.
+        for kword in valid_payload:
+            kwargs.pop(kword, None)
         query_args = self.kwargs_defaults.copy()
         query_args.update(kwargs)
         url = self.url_template.format(**query_args)
-        for result in self.interact_yield("POST", url, **callback_settings):
+        for result in self.interact_yield("POST", url, payload=payload,
+                                          **callback_settings):
             yield result
 
     def by_mac(self, callback=None, callback_args=None, **kwargs):
