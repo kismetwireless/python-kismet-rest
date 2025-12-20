@@ -28,6 +28,42 @@ Installing from source
 Usage examples
 --------------
 
+Authentication and setup
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Kismet now supports API tokens and roles. Use an API key with the ``admin`` role for controlling datasources, or a ``readonly`` key for queries. Pass it as ``apikey`` when creating an interface (basic auth via ``username`` / ``password`` also works).
+
+Quickstart (modern API + API key):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    from kismet_rest import Datasources, Devices
+
+    # Replace with your Kismet host and an API key (admin role for control)
+    ds = Datasources(host_uri="http://127.0.0.1:2501", apikey="YOUR_ADMIN_API_KEY")
+
+    # List datasources
+    for src in ds.all():
+        print(src["kismet.datasource.uuid"], src["kismet.datasource.name"])
+
+    # Ensure a datasource is running (required before devices will appear)
+    target_uuid = "<UUID_FROM_LIST>"
+    ds.open(target_uuid)      # start it if it was not auto-started
+    ds.set_hop(target_uuid)   # optional: enable hopping
+
+    # Fetch recently active devices
+    dev = Devices(host_uri="http://127.0.0.1:2501", apikey="YOUR_READONLY_OR_ADMIN_KEY")
+    for device in dev.all(ts=0, fields=["kismet.device.base.macaddr"]):
+        print(device.get("kismet.device.base.macaddr"))
+
+Notes and troubleshooting
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Datasource control endpoints (pause/resume/close/open) require POST and the admin role in current Kismet releases.
+- If no devices are returned, make sure at least one datasource is open/running; either configure it to auto-start in ``kismet.conf`` or call ``open(uuid)`` via the API.
+- Device listing supports field simplification and regex filters; use the ``fields`` and ``regex`` kwargs with ``Devices.all`` to reduce response size.
+- Tested against Kismet 2025-09-R1.
 
 Legacy functionality (KismetConnector):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

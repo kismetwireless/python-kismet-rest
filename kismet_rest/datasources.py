@@ -125,7 +125,7 @@ class Datasources(BaseInterface):
 
         """
         url = "/datasource/by-uuid/{}/pause_source.cmd".format(source)
-        return self.interact("GET", url, only_status=True)
+        return self.interact("POST", url, only_status=True)
 
     def resume(self, source):
         """Resume paused source.
@@ -138,7 +138,7 @@ class Datasources(BaseInterface):
 
         """
         url = "/datasource/by-uuid/{}/resume_source.cmd".format(source)
-        return self.interact("GET", url, only_status=True)
+        return self.interact("POST", url, only_status=True)
 
     def close(self, uuid):
         """Close source. A closed source will no longer be processed, and will remain closed unless reopened.
@@ -151,7 +151,7 @@ class Datasources(BaseInterface):
 
         """
         url = "/datasource/by-uuid/{}/close_source.cmd".format(uuid)
-        return self.interact("GET", url, only_status=True)
+        return self.interact("POST", url, only_status=True)
 
     def open(self, uuid):
         """Reopen a closed source.
@@ -164,5 +164,4 @@ class Datasources(BaseInterface):
 
         """
         url = "/datasource/by-uuid/{}/open_source.cmd".format(uuid)
-        return self.interact("GET", url, only_status=True)
-
+        return self.interact("POST", url, only_status=True)
