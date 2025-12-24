@@ -1,6 +1,6 @@
 """Kismet REST interface module.
 
-(c) 2018 Mike Kershaw / Dragorn
+(c) 2018-2023 Mike Kershaw / Dragorn
 Licensed under GPL2 or above
 """
 
@@ -17,8 +17,9 @@ from .gps import GPS  # NOQA
 from .logger import Logger  # NOQA
 from .legacy import KismetConnector  # NOQA
 from .messages import Messages  # NOQA
+from .packetchain import Packetchain  # NOQA
 # from .packets import Packets  # NOQA
 from .system import System  # NOQA
 from .utility import Utility  # NOQA
 
-__version__ = "2020.05.01"
+__version__ = "2025.03.13"

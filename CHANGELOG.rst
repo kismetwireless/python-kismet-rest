@@ -1,6 +1,14 @@
 Changelog
 =========
 
+v2025.03.13
+-----------
+
+Changes
+~~~~~~~
+- Allow passing fields/regex to Devices.all via POST payload.
+- Switch datasource control endpoints (pause/resume/open/close) to POST to match current Kismet API.
+
 v2020.05.01
 -----------
 
@@ -37,5 +45,3 @@ Other
 - Update docs. [Mike Kershaw / Dragorn]
 - Start extracting module. [Mike Kershaw / Dragorn]
 - Started repo. [Mike Kershaw / Dragorn]
-
-
